@@ -1,4 +1,4 @@
-#include "ra/matrix_multiply"
+#include "ra/matrix_multiply.hpp"
 
 int main()
 {

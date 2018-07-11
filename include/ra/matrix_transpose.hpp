@@ -4,7 +4,7 @@
 namespace ra::cache
 {
   template<class T>
-    void matrix_transpose(const T* a, std::size_t m, std::size_t m, std::size_t n, T* b);
+  void matrix_transpose(const T* a, std::size_t m, std::size_t n, T* b);
 
 
   template<class T>
