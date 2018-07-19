@@ -19,7 +19,7 @@ namespace ra::cache{
 
   template<class T>
   void cotrans(const T* matrix, T * matrixb,std::size_t startX, std::size_t startY, std::size_t x, std::size_t y, std::size_t ox, std::size_t oy) {
-      if ((x-startX)*(y-startY) <= 2) {
+      if ((x-startX)*(y-startY) <= 64) {
           base_transpose(matrix,matrixb,startX,startY,x,y,ox,oy);
           return;
       }

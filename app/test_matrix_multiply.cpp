@@ -1,59 +1,74 @@
 #include "ra/matrix_multiply.hpp"
-// #include <cmath>
-// #include <ctime>
-// #include <iostream>
-// #include <cassert>
-// #include <iomanip>
+#include <cmath>
+#include <ctime>
+#include <complex>
+#include <iostream>
+#include <cassert>
+#include <iomanip>
 
-// template<class T>
-// void print_matrix(std::size_t m, std::size_t n, const T* a)
-// {
-//     for( std::size_t i=0; i<n; ++i)
-//     {
-//         for (std::size_t j = 0; j<m; ++j)
-//         {
-//             std::cout << std::setw(3) << *(a+n*i+j) << ',' << ' ';
-//         }
-//         std::cout << std::endl;
-//     }
-//     std::cout << std::endl;
+template<class T>
+void print_matrix(std::size_t m, std::size_t n, const T* a)
+{
+    for( std::size_t i=0; i<m; ++i)
+    {
+        for (std::size_t j = 0; j<n; ++j)
+        {
+            std::cout << std::setw(3) << *(a+n*i+j) << ',' << ' ';
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
     
-// }
+}
 
-// template<class T>
-// void test_naive(std::size_t m, std::size_t n)
-// {
-//     std::size_t s = m*n;
-//     T a[s];
-//     T b[s];
-//     //to compare against
-//     T c[s];
-//     //feed random number gen
-//     std::srand((unsigned)time(NULL));
-//     for(std::size_t i =0; i< s; ++i)
-//     {
-//         //making sure I don't get huge numbers for elements
-//         *a++ = rand() %100;
-//     }
-//     ra::cache::matrix_transpose<T>(a,m,n,b);
-//     ra::cache::naive_matrix_transpose<T>(a,m,n,c);
+template<class T>
+void test_naive(std::size_t m, std::size_t n, std::size_t p)
+{
+    T c[m*p] = {0};
     
-//     for( std::size_t i=0; i<n; ++i)
-//     {
-//         for (std::size_t j = 0; j<m; ++j)
-//         {
-//             assert(b[n*i +j] = c[n*i +j]);
-//         }
-//     }
-//     print_matrix(m,n,a);    
-//     print_matrix(m,n,b);
-//     print_matrix(m,n,c);
+    T d[m*p] = {0};
+    T a[m*n] = {0};
+    T b[n*p] = {0};
     
-// }
+    std::srand((unsigned)time(NULL));
+    for(std::size_t i =0; i< m*n; ++i)
+    {
+        //making sure I don't get huge numbers for elements
+        a[i] = rand() %10;
+        
+    }
+    
+    std::srand((unsigned)time(NULL));
+    for(std::size_t i =0; i< n*p; ++i)
+    {
+        //making sure I don't get huge numbers for elements
+        b[i] = rand() %10;
+    }
+    
+    ra::cache::naive_matrix_multiply<T>(a,b,m,n,p,c);
+    ra::cache::matrix_multiply<T>(a,b,m,n,p,d);
+        
+    // cotrans(a,b,0,0,2,2,2,2);
+    for(std::size_t i = 0; i < m*p; ++i)
+    {
+        assert(d[i] == c[i]);
+    }
+
+    print_matrix(m,n,a);
+    
+    print_matrix(n,p,b);
+
+    print_matrix(m,p,d);
+    
+    print_matrix(m,p,c);
+}
 
 int main()
 {
-    // test_naive<int>(3,2);
+    test_naive<int>(3,2,3);
+    test_naive<double>(3,2,3);
+    test_naive<std::complex<double>>(3,2,3);
+    
     return 0;
     
 }

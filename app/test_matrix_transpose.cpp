@@ -60,7 +60,7 @@ void test_naive(std::size_t m, std::size_t n)
 
 int main()
 {
-    test_naive<int>(3,2);
+    test_naive<int>(9,9);
     return 0;
     
 }
