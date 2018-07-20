@@ -32,7 +32,7 @@ void test_naive(std::size_t n)
     T b[n] = {0};
     T c[n] = {0};
     
-    T start = 1;
+    // T start = 1;
     std::srand((unsigned)time(NULL));
     // for(std::size_t i =0; i< n; ++i)
     // {
@@ -49,7 +49,7 @@ void test_naive(std::size_t n)
     for(std::size_t i =0; i< n; ++i)
     {
         //making sure I don't get huge numbers for elements
-        a[i] = T(i, n-i);
+        a[i] = T(std::rand() %5, std::rand() %5);
         // std::cout << a[i] << std::endl;
     }
     // std::srand((unsigned)time(NULL));
