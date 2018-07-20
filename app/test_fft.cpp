@@ -32,6 +32,7 @@ void test_naive(std::size_t n)
     T b[n] = {0};
     T c[n] = {0};
     
+    T start = 1;
     std::srand((unsigned)time(NULL));
     // for(std::size_t i =0; i< n; ++i)
     // {
@@ -48,8 +49,8 @@ void test_naive(std::size_t n)
     for(std::size_t i =0; i< n; ++i)
     {
         //making sure I don't get huge numbers for elements
-        a[i] = T(std::rand() %5, std::rand() %5);
-        std::cout << a[i] << std::endl;
+        a[i] = T(i, n-i);
+        // std::cout << a[i] << std::endl;
     }
     // std::srand((unsigned)time(NULL));
     // for(std::size_t i =0; i< n*p; ++i)
@@ -79,9 +80,10 @@ int main()
     // test_naive<std::complex<double>>(256);
     // test_naive<std::complex<double>>(128);
     // test_naive<std::complex<double>>(64);
+    // test_naive<std::complex<double>>(131072);
     test_naive<std::complex<double>>(32);
     
-    // test_naive<std::complex<float>>(65536);
+    // test_naive<std::complex<double>>(65536);
     
     return 0;
 }
