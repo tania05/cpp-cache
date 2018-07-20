@@ -58,7 +58,7 @@ void test_naive(std::size_t n)
     //     b[i] = rand() %10;
     // }
     
-    size_t m = get_n1(n);
+    size_t m = ra::cache::get_n1(n);
     size_t p = n/m;
     std::cout << m << std::endl;
     
@@ -74,7 +74,7 @@ int main()
 {
     std::cout<<"Hello World"<< std::endl;;
     // while()
-    std::cout << get_n1(512) << std::endl;
+    std::cout << ra::cache::get_n1(512) << std::endl;
     test_naive<std::complex<double>>(8);
     
     return 0;
