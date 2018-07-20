@@ -33,6 +33,32 @@ std::size_t get_n1(std::size_t n)
     return (n%m1) == 0  ? m1 : m2;
 }
 
+template <class T>
+void base_dft(T* x)
+{
+    // for(std::size_t i = startRow; i< row; ++i)
+    // {   
+    //     // T sum = T(0);
+    //     for(std::size_t j = startCol; j< col; ++j)
+    //     {   
+    //         T sum = T(0);
+    //         for(std::size_t k = startCol; k<col; ++k )
+    //         {
+    //             std::size_t matrix_i = (n2*i +k);
+    //             T wn_ij = wFactors<T>((col-startCol), matrix_i, j);
+    //             sum+=x[matrix_i] * wn_ij;
+    //         }
+            
+    //             c[n2*i +j]+=sum ;
+    //     }
+        
+    // }
+    
+    T temp = *x;
+    *x += *(x+1);
+    *(x+1) = temp  - *(x+1);
+    
+}
 
 namespace ra::cache
 {
