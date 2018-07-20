@@ -32,7 +32,7 @@ void test_naive(std::size_t n)
     T b[n] = {0};
     T c[n] = {0};
     
-    // std::srand((unsigned)time(NULL));
+    std::srand((unsigned)time(NULL));
     // for(std::size_t i =0; i< n; ++i)
     // {
     //     //making sure I don't get huge numbers for elements
@@ -48,7 +48,7 @@ void test_naive(std::size_t n)
     for(std::size_t i =0; i< n; ++i)
     {
         //making sure I don't get huge numbers for elements
-        a[i] = T(std::rand() %10, std::rand() %3);
+        a[i] = T(std::rand() %5, std::rand() %5);
         std::cout << a[i] << std::endl;
     }
     // std::srand((unsigned)time(NULL));
@@ -64,7 +64,7 @@ void test_naive(std::size_t n)
     
     std::cout << p << std::endl;
     
-    print_matrix<T>(m,p,a);
+    // print_matrix<T>(m,p,a);
     // base_dft<T>(a);
     ra::cache::forward_fft(a,n);
     print_matrix<T>(m,p,a);
@@ -72,10 +72,7 @@ void test_naive(std::size_t n)
 
 int main()
 {
-    std::cout<<"Hello World"<< std::endl;;
-    // while()
-    std::cout << ra::cache::get_n1(512) << std::endl;
-    test_naive<std::complex<double>>(8);
+    test_naive<std::complex<double>>(32);
     
     return 0;
 }
