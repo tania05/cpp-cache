@@ -38,9 +38,9 @@ void test_naive(std::size_t m, std::size_t n)
         d[i] = rand() %100;
 
     }
-    std::cout << "Rrere" << std::endl;
-    print_matrix(m,n,d);
-    std::cout << "Done" << std::endl;
+    // std::cout << "Rrere" << std::endl;
+    // print_matrix(m,n,d);
+    // std::cout << "Done" << std::endl;
     
     ra::cache::matrix_transpose<T>(a,m,n,b);
     ra::cache::naive_matrix_transpose<T>(a,m,n,c);
@@ -52,15 +52,14 @@ void test_naive(std::size_t m, std::size_t n)
     }
     print_matrix(m,n,a);    
     print_matrix(n,m,b);
-    print_matrix(n,m,c);
-    print_matrix(n,m,d);
-    
-    
+    // print_matrix(n,m,c);
+    // print_matrix(n,m,d);    
 }
 
 int main()
 {
-    test_naive<int>(9,9);
+    // test_naive<int>(512,512);
+    test_naive<int>(45,5);
     return 0;
     
 }

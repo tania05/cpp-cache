@@ -72,7 +72,16 @@ void test_naive(std::size_t n)
 
 int main()
 {
-    test_naive<std::complex<double>>(32);
+    // test_naive<std::complex<double>>(32768);
+    // test_naive<std::complex<double>>(4096);
+    // test_naive<std::complex<double>>(1024);
+    // test_naive<std::complex<double>>(512);
+    // test_naive<std::complex<double>>(256);
+    // test_naive<std::complex<double>>(128);
+    // test_naive<std::complex<double>>(64);
+    // test_naive<std::complex<double>>(32);
+    
+    // test_naive<std::complex<float>>(65536);
     
     return 0;
 }

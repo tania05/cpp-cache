@@ -1,5 +1,4 @@
 #include "matrix_transpose.hpp"
-#include <type_traits>
 #include <iostream>
 #include <cmath>
 #include <complex.h>
@@ -77,7 +76,7 @@ namespace ra::cache
             return;
       }
       
-      ra::cache::naive_matrix_transpose<T>(x,row_size,col_size,x);
+      ra::cache::matrix_transpose<T>(x,row_size,col_size,x);
     
 
       //each row will have size row_size after matrix transposition above
@@ -93,7 +92,7 @@ namespace ra::cache
       //matrix has been transposed before, make sure row and columns are reversed.
       multiply_twiddle(x, col_size,row_size, col_size*row_size);
           
-      ra::cache::naive_matrix_transpose<T>(x,col_size,row_size,x);
+      ra::cache::matrix_transpose<T>(x,col_size,row_size,x);
       
       //After the preceeding transpose, the the matrix will have row and colum sizes to back to what it was before.
       //New sizes of row and columns on each of the recurrence sequence that follows 
@@ -109,7 +108,7 @@ namespace ra::cache
       }
       
       //final step
-      ra::cache::naive_matrix_transpose<T>(x,row_size,col_size,x);
+      ra::cache::matrix_transpose<T>(x,row_size,col_size,x);
   }
 
   template <class T>
