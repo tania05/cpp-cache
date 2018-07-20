@@ -13,7 +13,7 @@ std::size_t get_n1(std::size_t n)
     std::size_t m1, m2;
     m1 = m2 = n1;
     
-    // std::cout << "n1: " << n1 << std::endl;
+    // // std::cout << "n1: " << n1 << std::endl;
             
     
     //find upper and lower number close to square root
@@ -38,6 +38,29 @@ std::size_t get_n1(std::size_t n)
 
 
 template <class T>
+void  multiply_twiddle(T*x, std::size_t row, std::size_t col, std::size_t n)
+{   
+    using ctype = typename std::conditional<std::is_same<T, std::complex<double>>::value, double, float>::type;
+    // const ctype pi = std::acos(-1);
+    // const T  wn = std::exp( T((2 * M_PI) / (row*col)) * T(0, 1));
+    const T wn = T(std::cos(2* M_PI/(ctype)n), std::sin(2*M_PI/(ctype)n));
+    // std::cout << n << std::endl;
+            
+    
+    for(size_t i = 0; i < row; ++i)
+    {
+        for(size_t j = 0; j< col; ++j )
+        {
+            // std::cout << "twiddy value******** " << std::pow(wn, T((ctype)(-1)*i*j)) << std::endl;
+           *(x+ col*i +j) *= std::pow(wn, T((ctype)(-1)*i*j)); 
+        }
+    }
+    // *(x + col*(1) + 1) *= T(0,-1);
+}
+
+
+
+template <class T>
 void DFT(T* x, std::size_t row_size, std::size_t col_size)
 {
     if(col_size ==1)
@@ -49,11 +72,11 @@ void DFT(T* x, std::size_t row_size, std::size_t col_size)
           return;
     }
     
-    std::cout << "ROW AND ROCLUMN SIZE" << std::endl;
-    std::cout << row_size << std::endl;
-    std::cout << col_size << std::endl;
+    // std::cout << "ROW AND ROCLUMN SIZE" << std::endl;
+    // std::cout << row_size << std::endl;
+    // std::cout << col_size << std::endl;
     
-    std::cout << "***********" << std::endl << std::endl;
+    // std::cout << "***********" << std::endl << std::endl;
     
     naive_matrix_transpose<T>(x,row_size,col_size,x);
    
@@ -65,31 +88,31 @@ void DFT(T* x, std::size_t row_size, std::size_t col_size)
     //for each row
     for(size_t i = 0; i < col_size; ++i)
     {
-        std::cout<< "For each i ...... " << i << std::endl;
+        // std::cout<< "For each i ...... " << i << std::endl;
         
-        std::cout << "After transposition " << std::endl << std::endl;
+        // std::cout << "After transposition " << std::endl << std::endl;
     
         print_matrix<T>(col_size,row_size,x);
-        std::cout << "Matrix dim .... " << r << " " << c << std::endl;
-        std::cout << "value initial int x .. " << x[row_size*i] << std::endl << std::endl;
+        // std::cout << "Matrix dim .... " << r << " " << c << std::endl;
+        // std::cout << "value initial int x .. " << x[row_size*i] << std::endl << std::endl;
         DFT(x+(row_size*i),r,c);
     }
     
     
-        std::cout << "Before Twiddle " << std::endl << std::endl;
+        // std::cout << "Before Twiddle " << std::endl << std::endl;
     
         print_matrix<T>(col_size,row_size,x);
     
     //matrix has been transposed before, make sure row and columns are reversed.
     multiply_twiddle(x, col_size,row_size, col_size*row_size);
     
-    std::cout << "After twiddle " << std::endl << std::endl;
+    // std::cout << "After twiddle " << std::endl << std::endl;
     
     print_matrix<T>(col_size,row_size,x);
         
     naive_matrix_transpose<T>(x,col_size,row_size,x);
     
-    std::cout << "After Second transpose " << std::endl << std::endl;
+    // std::cout << "After Second transpose " << std::endl << std::endl;
     
     print_matrix<T>(row_size,col_size,x);
     
@@ -100,11 +123,11 @@ void DFT(T* x, std::size_t row_size, std::size_t col_size)
     for(size_t i = 0; i < row_size; ++i)
     {
         
-        std::cout << "value initial int x  IN SECOND LOOP.. " << x[col_size*i] << std::endl << std::endl;
+        // std::cout << "value initial int x  IN SECOND LOOP.. " << x[col_size*i] << std::endl << std::endl;
         DFT(x+(col_size*i),r,c);
     }
     
-    std::cout << "After Second DFT " << std::endl << std::endl;
+    // std::cout << "After Second DFT " << std::endl << std::endl;
     
     print_matrix<T>(row_size,col_size,x);
     
