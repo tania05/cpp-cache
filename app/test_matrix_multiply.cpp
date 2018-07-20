@@ -29,12 +29,14 @@ void test_naive(std::size_t m, std::size_t n, std::size_t p)
     T d[m*p] = {0};
     T a[m*n] = {0};
     T b[n*p] = {0};
-    
+        T start1 = 1;
+        T start2 = 1;
+
     std::srand((unsigned)time(NULL));
     for(std::size_t i =0; i< m*n; ++i)
     {
         //making sure I don't get huge numbers for elements
-        a[i] = rand() %10;
+        a[i] = start1++;
         
     }
     
@@ -42,7 +44,7 @@ void test_naive(std::size_t m, std::size_t n, std::size_t p)
     for(std::size_t i =0; i< n*p; ++i)
     {
         //making sure I don't get huge numbers for elements
-        b[i] = rand() %10;
+        b[i] = start2++;
     }
     
     ra::cache::naive_matrix_multiply<T>(a,b,m,n,p,c);
@@ -65,9 +67,9 @@ void test_naive(std::size_t m, std::size_t n, std::size_t p)
 
 int main()
 {
-    test_naive<int>(13,12,8);
-    test_naive<double>(3,2,3);
-    test_naive<std::complex<double>>(3,2,3);
+    // test_naive<int>(512,512,512);
+    test_naive<double>(12,15,6);
+    // test_naive<std::complex<double>>(3,2,3);
     
     return 0;
     

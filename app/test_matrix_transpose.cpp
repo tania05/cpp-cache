@@ -30,11 +30,15 @@ void test_naive(std::size_t m, std::size_t n)
     T c[s];
     T d[s];
     //feed random number gen
+
+    //to check for double transpose
+    T og[s];
     std::srand((unsigned)time(NULL));
     for(std::size_t i =0; i< s; ++i)
     {
         //making sure I don't get huge numbers for elements
         a[i] = rand() %100;
+        og[i] = a[i];
         d[i] = rand() %100;
 
     }
@@ -50,16 +54,36 @@ void test_naive(std::size_t m, std::size_t n)
     {
         assert(b[i]==c[i]);
     }
-    print_matrix(m,n,a);    
-    print_matrix(n,m,b);
+
+    std::cout << "a" << std::endl;
+    // print_matrix(m,n,a);    
+    std::cout << "b" << std::endl;
+    // print_matrix(n,m,b);
+    std::cout << "og" << std::endl;
+    // print_matrix(n,m,og);
     // print_matrix(n,m,c);
-    // print_matrix(n,m,d);    
+    // print_matrix(n,m,d); 
+
+    ra::cache::naive_matrix_transpose<T>(a,m,n,a); // itself
+    std::cout << "a" << std::endl;
+    // print_matrix(m,n,a);    
+
+    ra::cache::naive_matrix_transpose<T>(a,m,n,a); // itself
+
+    std::cout << "a" << std::endl;
+    // print_matrix(m,n,a);
+    for( std::size_t i=0; i<m*n; ++i)
+    {
+        assert(b[i]==c[i]);
+        assert(og[i]==a[i]);
+    };    
+    
 }
 
 int main()
 {
     // test_naive<int>(512,512);
-    test_naive<int>(45,5);
+    test_naive<int>(3,3);
     return 0;
     
 }
