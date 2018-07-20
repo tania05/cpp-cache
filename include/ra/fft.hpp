@@ -1,6 +1,9 @@
 #include <cstdio>
 #include <iostream>
 
+namespace ra::cache
+{
+
 
 std::size_t get_n1(std::size_t n)
 {
@@ -60,8 +63,19 @@ void base_dft(T* x)
     
 }
 
-namespace ra::cache
-{
   template <class T>
-  void forward_fft(T* x, std::size_t n);
+  void forward_fft(T* x, std::size_t n)
+  {
+    //step 1: find n1 and n2
+    std::size_t n1 = get_n1(n);
+    std::size_t n2 = n/n1;
+    
+    //step 2: transpose matrix A 
+    
+    DFT(x,n1,n2);
+    
+    //step3 : inner summation
+    
+    
+  }
 }
