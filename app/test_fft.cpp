@@ -9,6 +9,21 @@
 #include <iomanip>
 #include <cstdint>
 
+template<class T>
+void print_matrix(std::size_t m, std::size_t n, const T* a)
+{
+    for( std::size_t i=0; i<m; ++i)
+    {
+        for (std::size_t j = 0; j<n; ++j)
+        {
+            std::cout << std::setw(3) << *(a+n*i+j) << ',' << ' ';
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+    
+}
+
 
 template<class T>
 void test_naive(std::size_t n)
