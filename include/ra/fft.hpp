@@ -36,6 +36,82 @@ std::size_t get_n1(std::size_t n)
     return (n%m1) == 0  ? m1 : m2;
 }
 
+
+template <class T>
+void DFT(T* x, std::size_t row_size, std::size_t col_size)
+{
+    if(col_size ==1)
+    {
+        return;
+        
+    } else if (row_size * col_size <= 2) {
+          base_dft(x);
+          return;
+    }
+    
+    std::cout << "ROW AND ROCLUMN SIZE" << std::endl;
+    std::cout << row_size << std::endl;
+    std::cout << col_size << std::endl;
+    
+    std::cout << "***********" << std::endl << std::endl;
+    
+    naive_matrix_transpose<T>(x,row_size,col_size,x);
+   
+
+    //each row will have size row_size after matrix transposition
+    std::size_t r = get_n1(row_size);
+    std::size_t c = row_size/r;
+    
+    //for each row
+    for(size_t i = 0; i < col_size; ++i)
+    {
+        std::cout<< "For each i ...... " << i << std::endl;
+        
+        std::cout << "After transposition " << std::endl << std::endl;
+    
+        print_matrix<T>(col_size,row_size,x);
+        std::cout << "Matrix dim .... " << r << " " << c << std::endl;
+        std::cout << "value initial int x .. " << x[row_size*i] << std::endl << std::endl;
+        DFT(x+(row_size*i),r,c);
+    }
+    
+    
+        std::cout << "Before Twiddle " << std::endl << std::endl;
+    
+        print_matrix<T>(col_size,row_size,x);
+    
+    //matrix has been transposed before, make sure row and columns are reversed.
+    multiply_twiddle(x, col_size,row_size, col_size*row_size);
+    
+    std::cout << "After twiddle " << std::endl << std::endl;
+    
+    print_matrix<T>(col_size,row_size,x);
+        
+    naive_matrix_transpose<T>(x,col_size,row_size,x);
+    
+    std::cout << "After Second transpose " << std::endl << std::endl;
+    
+    print_matrix<T>(row_size,col_size,x);
+    
+    
+    r = get_n1(col_size);
+    c = col_size/r;
+    
+    for(size_t i = 0; i < row_size; ++i)
+    {
+        
+        std::cout << "value initial int x  IN SECOND LOOP.. " << x[col_size*i] << std::endl << std::endl;
+        DFT(x+(col_size*i),r,c);
+    }
+    
+    std::cout << "After Second DFT " << std::endl << std::endl;
+    
+    print_matrix<T>(row_size,col_size,x);
+    
+    naive_matrix_transpose<T>(x,row_size,col_size,x);
+}
+
+
 template <class T>
 void base_dft(T* x)
 {
