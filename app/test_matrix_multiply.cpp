@@ -65,7 +65,7 @@ void test_naive(std::size_t m, std::size_t n, std::size_t p)
 
 int main()
 {
-    test_naive<int>(3,2,3);
+    test_naive<int>(13,12,8);
     test_naive<double>(3,2,3);
     test_naive<std::complex<double>>(3,2,3);
     

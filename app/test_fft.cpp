@@ -79,7 +79,7 @@ int main()
     // test_naive<std::complex<double>>(256);
     // test_naive<std::complex<double>>(128);
     // test_naive<std::complex<double>>(64);
-    // test_naive<std::complex<double>>(32);
+    test_naive<std::complex<double>>(32);
     
     // test_naive<std::complex<float>>(65536);
     
