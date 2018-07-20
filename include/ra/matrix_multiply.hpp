@@ -34,12 +34,14 @@ void comult(const T*a , const T* b, std::size_t startRowA, std::size_t startColA
     size_t sizeRowA = m-startRowA;
     size_t sizeColA = n-startColA;
     size_t sizeColB = p-startColB;
+    
+    //base case
     if(sizeRowA * sizeColA * sizeColB <= 64)
     {
         base_multiply(a,b,startRowA,startColA,startColB,m,n,p,c,om,on,op);
         return;
     }
-    //case 1 // override the destination
+    //case 1 row of a is the largest
     if((sizeRowA >= sizeColA) && (sizeRowA>=sizeColB))
     {
         size_t mid = (sizeRowA) /2 + sizeRowA%2;
@@ -47,7 +49,7 @@ void comult(const T*a , const T* b, std::size_t startRowA, std::size_t startColA
         comult(a,b,startRowA+mid,startColA,startColB,m,n,p,c,om,on,op);
         return;
     }
-    //case 3 //override the destination
+    //case 3 column of B is the largest
     else if((sizeColB>=sizeRowA) && (sizeColB>=sizeColA))
     {
         size_t mid = (sizeColB) /2 + sizeColB%2;
@@ -55,7 +57,7 @@ void comult(const T*a , const T* b, std::size_t startRowA, std::size_t startColA
         comult(a,b,startRowA,startColA,startColB+mid,m,n,p,c,om,on,op);
         return;
     }
-    //case 2
+    //case 2 column of A is the largest
     else
     {
         size_t mid = (sizeColA) /2 + sizeColA%2;
